@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  mydb:
+    image: postgres:12
+    restart: always
+    container_name: mypg
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "5HHKi7w6hXp9rXo2Uw9"
+      POSTGRES_USER: pguser
+      POSTGRES_DB: mydb
+    volumes:
+    - ./postgres/data:/var/lib/postgresql/data
+  pgc:
+     image: prasanthmj/pgclient
+     restart: always
+     container_name: pgclient
+     environment:
+        PGHOST: mydb
+        PGPASSWORD: "5HHKi7w6hXp9rXo2Uw9"
+        PGUSER: pguser
+        PGDATABASE: mydb
+        S3_BUCKET: xxxxxx
+        RCLONE_S3_ENV_AUTH: "true"
+        RCLONE_CONFIG_S3REMOTE_PROVIDER: AWS
+        RCLONE_CONFIG_S3REMOTE_TYPE: s3
+        RCLONE_CONFIG_S3REMOTE_ACCESS_KEY_ID: "xxxxx"
+        RCLONE_CONFIG_S3REMOTE_SECRET_ACCESS_KEY: "xxxxx"
+        RCLONE_CONFIG_S3REMOTE_REGION: "ap-southeast-1"
+
