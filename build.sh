@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DOCKER_DEFAULT_PLATFORM=linux/arm64
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 
 if [ -z "$1" ]
@@ -13,11 +13,11 @@ COMMAND=$1
 case $COMMAND in
     build)
         pushd ./docker
-        docker build -t prasanthmj/pgclient:latest -t prasanthmj/pgclient:1.0.8 .
+        docker buildx build --platform linux/amd64 -t prasanthmj/pgclient:latest -t prasanthmj/pgclient:1.0.8 . --load
         popd
     ;;
     push)
-        docker push prasanthmj/pgclient:latest
+        docker push prasanthmj/pgclient -a
     ;;
 esac
 

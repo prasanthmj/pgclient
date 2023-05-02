@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 ENV X_RCLONE_VERSION=current
-ENV ARCH=arm64
+ENV ARCH=amd64
 
 RUN apk update && \
     apk upgrade && \
